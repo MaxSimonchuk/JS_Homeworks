@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        display: flex;
+    }
+    div {
+    }
+
+</style>
+<body>
+<script>
+    let employees = [
+        {name: "Kate", unit: "HR", hours: 5 , money : 1000},
+        {name: "Mike", unit: "Frontend", hours: 7, money : 800},
+        {name: "Harry", unit: "HR", hours: 3, money : 600},
+        {name: "Harry", unit: "HR", hours: 4, money : 400},
+        {name: "Jon", unit: "Backend", hours: 9, money : 1700},
+        {name: "Sergio", unit: "HR", hours: 3, money : 1100},
+        {name: "Den", unit: "HR", hours: 9, money : 1100}
+    ]
+    let table = document.createElement("table");
+    function  showEmployeesTable() {
+        document.body.append(table);
+        for (let index = 0 ; index < employees.length;index++) {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.style.border = "1px solid black"
+            td.innerHTML = employees[index].name;
+            tr.append(td);
+            let td1 = document.createElement("td");
+            td1.innerHTML = employees[index].unit;
+            td1.style.border = "1px solid black"
+            tr.append(td1);
+            table.append(tr);
+            let td2 = document.createElement("td");
+            td2.innerHTML = employees[index].hours;
+            td2.style.border = "1px solid black"
+            tr.append(td2);
+            let td3 = document.createElement("td");
+            td3.innerHTML = employees[index].money;
+            td3.style.border = "1px solid black"
+            tr.append(td3);
+            table.append(tr);
+        }
+    }
+
+    function calculateHoursTotal(position) {
+        let hours = 0;
+        for (let index = 0 ; index < employees.length;index++) {
+            if(employees[index].unit == position) {
+                hours += employees[index].hours;
+            }
+        }
+        return hours ;
+    }
+
+    function calculateMoneyTotal() {
+        let totalAmount = 0;
+        for (let index = 0 ; index < employees.length;index++) {
+            totalAmount += employees[index].money;
+        }
+        return totalAmount ;
+    }
+
+    function numberOfEmployees() {
+        let resultNumberEmployees = 0;
+        for (let index = 0 ; index < employees.length;index++) {
+            if(employees[index].hours >= 8) {
+                resultNumberEmployees += 1;
+            }
+        }
+        return resultNumberEmployees ;
+    }
+    /*add new function for task with TotalAmountMoney*/
+    function amountMoneyHighestEarningsEmployees() {
+        let totalMoney = 0;
+        for (let index = 0 ; index < employees.length;index++) {
+            if(employees[index].money > 1000 ) {
+                totalMoney += employees[index].money;
+            }
+        }
+        return totalMoney;
+    }
+
+    function showHoursTotal(hours) {
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+        td2.innerHTML =  "Сумма";
+        td3.innerHTML =  "годин ";
+        td4.innerHTML =  hours;
+        let tr = document.createElement("tr");
+        tr.append(td2);
+        tr.append(td3);
+        tr.append(td4);
+        td2.style.border = "1px solid black"
+        td3.style.border = "1px solid black"
+        td4.style.border = "1px solid black"
+        table.append(tr);
+    }
+
+    function showHoursMinMax() {
+        let boxHours = document.createElement("div")
+        let table = document.createElement("table")
+        document.body.append(boxHours)
+        let td = document.createElement("td");
+        let td1 = document.createElement("td");
+        td.innerHTML = `min hours :${employees[minIndex].hours} for ${employees[minIndex].name}`;
+        let resultStr = `max hours :${employees[maxIndexes[0]].hours} for `;
+        for (let i = 0;i < maxIndexes.length;i++) {
+            resultStr += `${employees[maxIndexes[i]].name}, `;
+        }
+        td1.innerHTML = resultStr.slice(0, resultStr.length - 2);
+        let tdStyle = "1px solid black"
+        td.style.border = tdStyle;
+        td1.style.border = tdStyle;
+        let tr = document.createElement("tr");
+        let tr1 = document.createElement("tr");
+        tr.append(td);
+        tr1.append(td1);
+        boxHours.append(table);
+        table.append(tr);
+        table.append(tr1);
+    }
+
+/*add new function for TotalMoney*/
+    function showTotalMoneyEmployees() {
+        let boxMoney = document.createElement("div");
+        let table = document.createElement("table");
+        document.body.append(boxMoney);
+        let td = document.createElement("td");
+        let td1 = document.createElement("td");
+        td.innerHTML = "Загальна сума працівників: " + totalMoney;
+        td1.innerHTML = "Сума вище 1000грн працівника: " + totalAmountResult;
+        let tdStyle = "1px solid black";
+        td.style.border = tdStyle;
+        td1.style.border = tdStyle;
+        let tr = document.createElement("tr");
+        let tr1 = document.createElement("tr");
+        tr.append(td);
+        tr1.append(td1);
+        boxMoney.append(table);
+        table.append(tr);
+        table.append(tr1);
+    }
+
+    function findMinHoursEmployee() {
+        let minHours = 24;
+        let minIndex = 0;
+        for (let index = 0 ; index < employees.length;index++) {
+            if (employees[index].hours < maxId) {
+                maxId = employees[index].hours;
+                minIndex = index;
+            }
+        }
+        return minIndex;
+    }
+
+    function findMaxHoursEmployees() {
+        let maxHours = 0;
+        let maxIndexes = [];
+        for (let index = 0 ; index < employees.length;index++) {
+            if (employees[index].hours > maxHours ) {
+                maxHours = employees[index].hours;
+                maxIndexes = [];
+                maxIndexes.push(index);
+            } else if (employees[index].hours == maxHours) {
+                maxIndexes.push(index);
+            }
+        }
+        return maxIndexes;
+    }
+
+    function showNumberEmployees(resultNumberEmployees){
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+        let td5 = document.createElement("td");
+        td2.innerHTML =  "8 годин";
+        td3.innerHTML =  "і більше";
+        td4.innerHTML =  resultNumberEmployees ;
+        td4.innerHTML =  resultNumberEmployees ;
+        let tr = document.createElement("tr");
+        tr.append(td2);
+        tr.append(td3);
+        tr.append(td4);
+        tr.append(td5);
+        td2.style.border = "1px solid black"
+        td3.style.border = "1px solid black"
+        td4.style.border = "1px solid black"
+        table.append(tr);
+    }
+
+    showEmployeesTable();
+    let resNumEmp = numberOfEmployees();
+    showNumberEmployees(resNumEmp);
+    let sum = calculateHoursTotal("HR");
+    let front = calculateHoursTotal("Frontend");
+    let back = calculateHoursTotal("Backend");
+    let minIndex = findMinHoursEmployee();
+    let maxIndexes = findMaxHoursEmployees();
+    showHoursTotal(sum);
+    showHoursTotal(front);
+    showHoursTotal(back);
+    showHoursMinMax();
+
+    /*new variables and challenge */
+    let totalMoney = calculateMoneyTotal();
+    let totalAmountResult = amountMoneyHighestEarningsEmployees();
+    showTotalMoneyEmployees(totalMoney,totalAmountResult);
+
+
+
+
+
+</script>
+</body>
+</html>

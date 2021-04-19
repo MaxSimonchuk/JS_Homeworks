@@ -1,0 +1,6 @@
+.container{
+    display: flex;
+}
+#main-table{
+    height: 20px;
+}

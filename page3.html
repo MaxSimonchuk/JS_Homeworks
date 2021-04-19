@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .rect {
+            background-color: brown;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class='rect' id='square'></div>
+    <script>
+
+        function move() {
+            let movingRect = document.getElementById('square');
+            let x = 0;
+            let dx = 1;
+            let y = 0;
+            let dy = 1;
+            const RECT_WIDTH = 100;
+
+            let intervalId = setInterval(function () {
+                movingRect.style.left = x + 'px';
+                movingRect.style.top = y + 'px';
+                x += dx;
+                y += dy;
+                if (x > window.innerWidth -RECT_WIDTH || x < 0) {
+                    dx = -dx;
+                }
+                if (y > window.innerHeight -RECT_WIDTH || y < 0) {
+                    dy = -dy;
+                }
+            }, 20);
+            setTimeout(()=> clearInterval(intervalId), 15000);
+        }
+        move();
+//
+    </script>   
+</body>
+</html>

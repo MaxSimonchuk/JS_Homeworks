@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DZ-4</title>
+</head>
+
+
+
+<style>
+    #table {
+        display: flex;
+    }
+    div {
+    }
+    .box{
+        margin-top: 5px;
+    }
+
+</style>
+<body>
+<div id="table"></div>
+<div>
+    <input id="input"/>
+    <button onclick="calculateAndShowHoursAndMoney()">Calculate</button>
+</div>
+<div>
+    <button onclick="showHoursEveryEmployeesButton()">Show Employees</button>
+</div>
+<div id="employees-hours"></div>
+<div class="box">
+    <button onclick="showEmployeeThreeDaysButton()">Found Employees</button>
+</div>
+
+<script>
+    let employees = [
+        {name: "Kate", unit: "HR", hours: 5 , money : 1000},
+        {name: "Mike", unit: "Frontend", hours: 7, money : 800},
+        {name: "Harry", unit: "HR", hours: 3, money : 600},
+        {name: "Harry", unit: "HR", hours: 4, money : 400},
+        {name: "Jon", unit: "Backend", hours: 9, money : 1700},
+        {name: "Sergio", unit: "HR", hours: 3, money : 1100},
+        {name: "Harry", unit: "HR", hours: 9, money : 400},
+        {name: "Den", unit: "HR", hours: 9, money : 1100},
+        {name: "Den", unit: "HR", hours: 5, money : 1100}
+    ]
+
+    function calculateHoursForEmployee(name) {
+        let hours = 0;
+        let employeeName = "";
+        for (let index = 0 ; index < employees.length;index++) {
+            if(employees[index].name.toUpperCase() == name.toUpperCase()) {
+                hours += employees[index].hours;
+                employeeName = employees[index].name;
+            }
+        }
+        return {hours: hours, name: employeeName} ;
+    }
+
+    function calculateSumMoneyForEmployee(name) {
+        let money = 0;
+        let employeeName = "";
+        for (let index = 0 ; index < employees.length;index++) {
+            if(employees[index].name.toUpperCase() == name.toUpperCase()) {
+                money += employees[index].money;
+                employeeName = employees[index].name;
+            }
+        }
+        return {money: money, name:employeeName} ;
+    }
+
+    let table = document.createElement("table");
+    function  showEmployeesTable() {
+        document.getElementById("table").append(table);
+        for (let index = 0 ; index < employees.length;index++) {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.style.border = "1px solid black";
+            td.innerHTML = employees[index].name;
+            tr.append(td);
+            let td1 = document.createElement("td");
+            td1.innerHTML = employees[index].unit;
+            td1.style.border = "1px solid black";
+            tr.append(td1);
+            table.append(tr);
+            let td2 = document.createElement("td");
+            td2.innerHTML = employees[index].hours ;
+            td2.style.border = "1px solid black";
+            tr.append(td2);
+            let td3 = document.createElement("td");
+            td3.innerHTML = employees[index].money;
+            td3.style.border = "1px solid black";
+            tr.append(td3);
+            table.append(tr);
+        }
+    }
+
+    function  showEmployeesTableHoursAndMoney(name,sumHours,sumMoney) {
+        let boxHours = document.createElement("div");
+        let table = document.createElement("table");
+        document.getElementById("table").append(boxHours);
+        let tr = document.createElement("tr");
+        let td = document.createElement("td");
+        td.style.border = "1px solid black"
+        td.innerHTML = `Hour ${name} :  ${sumHours}`;
+        tr.append(td);
+        let td1 = document.createElement("td");
+        td1.style.border = "1px solid black";
+        td1.innerHTML = `Money ${name} :${sumMoney}`;
+        tr.append(td1);
+        boxHours.append(table);
+        table.append(tr);
+    }
+
+    function calculateAndShowHoursAndMoney(){
+        let name = document.getElementById("input").value;
+        let sumHours = calculateHoursForEmployee(name);
+        let sumMoney = calculateSumMoneyForEmployee(name);
+        showEmployeesTableHoursAndMoney(sumHours.name, sumHours.hours, sumMoney.money, sumMoney.name);
+    }
+    showEmployeesTable();
+
+    /*Exercise Harry hours */
+
+    function calculateHoursForAllEmployees() {
+        let result = [];
+        for (let i = 0;i < employees.length;i++) {
+            let found = false;
+            for (let j = 0;j < result.length;j++){
+                if(employees[i].name == result[j].name) { // Знайти імя яке вже було
+                    found = true;
+                    result[j].hours += employees[i].hours;
+                    break;
+                }
+            }
+            if (!found) {
+                result.push(employees[i]);
+            }
+        }
+        return result;
+    }
+
+    function showTableHoursEveryEmployees(employeesData) {
+        let tableHours = document.createElement("div");
+        let table = document.createElement("table");
+        document.getElementById("employees-hours").append(tableHours);
+        for (let index = 0 ; index < employees.length;index++){
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.style.border = "1px solid black";
+            td.innerHTML = ` ${employeesData[index].name} : ${employeesData[index].hours} hours`;
+            tr.append(td);
+            tableHours.append(table);
+            table.append(tr);
+        }
+    }
+
+    function showHoursEveryEmployeesButton() {
+        let hoursSum = calculateHoursForAllEmployees();
+        showTableHoursEveryEmployees(hoursSum);
+    }
+
+    function foundEmployeesThreeDays() {
+        let hours = 0;
+        for (let index = 0 ; index < employees.length;index++) {
+            if(employees[index].hours >= 15) {
+                hours += employees[index].hours;
+            }
+        }
+        return hours ;
+
+    }
+
+
+    function showEmployeeThreeDaysButton() {
+
+        foundEmployeesThreeDays();
+    }
+
+
+</script>
+
+</body>
+</html>

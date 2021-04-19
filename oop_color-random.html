@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="oop_color-random.css">
+</head>
+<body>
+<div id="circle"></div>
+<div id="circle1"></div>
+<script>
+    function blinkCircle(id) {
+        const element = document.getElementById(id);
+        setInterval(function() {
+            let r = Math.round(Math.random() * 255);
+            let g = Math.round(Math.random() * 255);
+            let b = Math.round(Math.random() * 255);
+            let circleBg = "background : rgb(" + r + ", "+ g + ", "+ b +");";
+            element.style = circleBg;
+        }, 1000);
+    }
+    blinkCircle("circle");
+    blinkCircle("circle1");
+
+
+</script>
+</body>
+</html>

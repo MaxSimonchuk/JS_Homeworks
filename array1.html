@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="result">
+</div>
+<script>
+    let names = ["John","Sergio","Max"];
+    let wages = [200,500,70];
+    let totalAmount = 0;
+    // let result = "<table>";
+    // let totalAmount =  wages[0] + wages[1] + wages[2];
+    // let totalTag = "<tr><td>";
+    // for (let i = 0 ; i < names.length;i++) {
+    //     result += "<tr><td>" + names[i]+ "</td><td>" + wages[i] + "</td></tr>";
+    // }
+    // result+= "<tr><td></td><td>" + totalAmount + "</td></tr>";
+    // result += "</table>";
+    // document.getElementById("result").innerHTML = result;
+    let table = document.createElement("table");
+    document.body.append(table);
+    for (let i = 0 ; i < names.length;i++) {
+         let tr = document.createElement("tr");
+         let td = document.createElement("td");
+         td.innerHTML = names[i];
+         tr.append(td);
+         let td1 = document.createElement("td");
+         td1.innerHTML = wages[i];
+         tr.append(td1);
+         table.append(tr);
+         totalAmount += wages[i];
+    }
+    let td2 = document.createElement("td");
+    let td3 = document.createElement("td");
+    td3.innerHTML = totalAmount;
+    let tr = document.createElement("tr");
+    tr.append(td2);
+    tr.append(td3);
+    table.append(tr);
+
+
+
+
+</script>
+
+</body>
+</html>

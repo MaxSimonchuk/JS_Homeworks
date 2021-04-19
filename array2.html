@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let names = ["Kate","Mike","Jon","Harry","Den"];
+    let units = ["HR","Frontend","Backend","HR","HR"];
+    let hours = [5,7,9,3,10];
+    let table = document.createElement("table");
+    document.body.append(table);
+    for (let index = 0 ; index < names.length;index++) {
+        let tr = document.createElement("tr");
+        let td = document.createElement("td");
+        td.innerHTML = names[index];
+        tr.append(td);
+        let td1 = document.createElement("td");
+        td1.innerHTML = units[index];
+        tr.append(td1);
+        table.append(tr);
+        let td2 = document.createElement("td");
+        td2.innerHTML = hours[index];
+        tr.append(td2);
+        table.append(tr);
+    }
+    let hoursHR = 0;
+    for (let index = 0 ; index < names.length;index++) {
+        if(units[index] == "HR") {
+            hoursHR += hours[index];
+        }
+    }
+    let td3 = document.createElement("td");
+    let td4 = document.createElement("td");
+    let td5 = document.createElement("td");
+    td3.innerHTML =  "Сумма";
+    td4.innerHTML =  "годин HR";
+    td5.innerHTML =  hoursHR;
+    let tr = document.createElement("tr");
+    tr.append(td3);
+    tr.append(td4);
+    tr.append(td5);
+    table.append(tr);
+
+</script>
+</body>
+</html>

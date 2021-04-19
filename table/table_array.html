@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div>
+    <button onclick="showMainTable()"> Show </button>
+    <div class="container">
+        <div id="main-table"></div>
+        <div id="detail-table"></div>
+    </div>
+</div>
+<script>
+//    const information = [
+//        {title: "Серцево судинні захворювання", interest: 84},
+//        {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+//        {title: "Артеріальна гіпертензія АГ-2", interest: 37},
+//        {title: "Захворювання легенової системи", interest: 18}
+//
+//    ];
+
+    const information1 = [
+        {
+            name:"Вимірювання 01.02.2021",
+            information: [
+                {title: "Серцево судинні захворювання", interest: 84},
+                {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+                {title: "Артеріальна гіпертензія АГ-2", interest: 37},
+                {title: "Захворювання легенової системи", interest: 18},
+                {title: "Психічні(неврологічні)захворювання", interest: 94},
+                {title: "Аритмія", interest: 100}]
+        },
+        {
+            name:"Вимірювання 02.02.2021",
+            information: [
+                {title: "Серцево судинні захворювання", interest: 84},
+                {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+                {title: "Артеріальна гіпертензія АГ-2", interest: 80},
+                {title: "Захворювання легенової системи", interest: 18},
+                {title: "Психічні(неврологічні)захворювання", interest: 94},
+                {title: "Аритмія", interest: 100}]
+        },
+        {
+            name:"Вимірювання 03.02.2021",
+            information: [
+            {title: "Серцево судинні захворювання", interest: 60},
+            {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+            {title: "Артеріальна гіпертензія АГ-2", interest: 26},
+            {title: "Захворювання легенової системи", interest: 18},
+            {title: "Психічні(неврологічні)захворювання", interest: 73},
+            {title: "Аритмія", interest: 100}]
+        },
+        {
+            name:"Вимірювання 04.02.2021",
+            information: [
+                {title: "Серцево судинні захворювання", interest: 84},
+                {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+                {title: "Артеріальна гіпертензія АГ-2", interest: 97},
+                {title: "Захворювання легенової системи", interest: 18},
+                {title: "Психічні(неврологічні)захворювання", interest: 94},
+                {title: "Аритмія", interest: 100}]
+        },
+        {
+            name:"Вимірювання 07.02.2021",
+            information: [
+            {title: "Серцево судинні захворювання", interest: 25},
+            {title: "Артеріальна гіпертензія АГ-1", interest: 83},
+            {title: "Артеріальна гіпертензія АГ-2", interest: 37},
+            {title: "Захворювання легенової системи", interest: 98},
+            {title: "Психічні(неврологічні)захворювання", interest: 94},
+            {title: "Аритмія", interest: 100}]
+        }
+    ];
+
+// .................
+
+    function  showTable(i) {
+        let table = document.createElement("table");
+        let container = document.getElementById("detail-table");
+        container.innerHTML = "";
+        container.append(table);
+        for (let index = 0 ; index < information1[i].information.length;index++) {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.style.border = "1px solid black";
+            td.style.backgroundColor = determineColor(index,i);
+            td.innerHTML = information1[i].information[index].title;
+            tr.append(td);
+            let td1 = document.createElement("td");
+            td1.innerHTML = information1[i].information[index].interest + "%";
+            td1.style.border = "1px solid black";
+            td1.style.backgroundColor = determineColor(index,i);
+            tr.append(td1);
+            table.append(tr);
+        }
+    }
+
+    let selectedTr;
+    function  showMainTable() {
+        let container = document.getElementById("main-table");
+        let mainTable = document.createElement("table");
+        container.innerHTML = "";
+        container.append(mainTable);
+        for (let index = 0 ; index < information1.length;index++) {
+            let tr = document.createElement("tr");
+            tr.onclick = function() {
+                if (tr != selectedTr) {
+                    showTable(index);
+//                ADD
+                    tr.style.backgroundColor = "green";
+                    if (selectedTr)
+                        selectedTr.style.backgroundColor = "white";
+                    selectedTr = tr;
+                }
+            };
+            let td = document.createElement("td");
+            td.style.border = "1px solid black";
+            td.innerHTML = information1[index].name;
+            tr.append(td);
+            mainTable.append(tr);
+        }
+    }
+
+    function determineColor(index,i) {
+       /* let color = "";
+        if(information[index].interest >= 75) {
+            color = "red";
+        } else if (information[index].interest >= 63){
+            color = "orange";
+        }else {
+            color = "white";
+        }*/
+       return information1[i].information[index].interest >= 75 ? "red" : (information1[i].information[index].interest >= 63 ? "orange" : "white");
+//        return color ;
+    }
+
+    function fullSum (){
+        let sum = 0;
+        for(let i = 0; i < information1[i].information.length; i++){
+            sum  += information1[i].information.interest
+        }
+        return sum;
+
+
+    }
+
+    fullSum();
+
+</script>
+
+
+</body>
+</html>

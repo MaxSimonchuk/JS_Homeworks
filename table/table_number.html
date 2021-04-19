@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            display: flex;
+
+        }
+
+    </style>
+</head>
+<body>
+<script>
+    const ROWS_NUMBERS = 4;
+    let numbersOne = [12,5,7,2];
+    let numbersTwo = [5,3,14,8];
+    let numbersThree = [2,9,6,11];
+    let table = document.createElement("table");
+    function showTable() {
+        document.body.append(table);
+        for (let index = 0 ; index < numbersOne.length;index++) {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.innerHTML = numbersOne[index];
+            tr.append(td);
+            td.style.border = "1px solid black";
+            let td1 = document.createElement("td");
+            td1.innerHTML = numbersTwo[index];
+            td1.style.border = "1px solid black";
+            tr.append(td1);
+            table.append(tr);
+            let td2 = document.createElement("td");
+            td2.innerHTML = numbersThree[index];
+            td2.style.border = "1px solid black";
+            tr.append(td2);
+            table.append(tr);
+        }
+    }
+
+
+//    for column
+    function calculateColumnsSums() {
+        let sumColumn = [0,0,0];
+        for (let index = 0 ; index < numbersOne.length;index++) {
+            sumColumn[0] += numbersOne[index];
+        }
+
+        for (let index = 0 ; index < numbersTwo.length;index++) {
+            sumColumn[1] += numbersTwo[index];
+        }
+
+        for (let index = 0 ; index < numbersThree.length;index++) {
+            sumColumn[2] += numbersThree[index];
+        }
+        return sumColumn;
+    }
+
+    function showColumnsSums(sumColumn) {
+        let tr = document.createElement("tr");
+        for (let i = 0; i < 3; i++){
+            let td = document.createElement("td");
+            td.innerHTML =  sumColumn[i];
+            tr.append(td);
+        }
+        table.append(tr);
+    }
+
+//    for row
+    function calculateRowsSums() {
+        let sumRow = [];
+        for (let index = 0 ; index < ROWS_NUMBERS;index++) {
+            sumRow.push(numbersOne[index] + numbersTwo[index] + numbersThree[index]);
+        }
+        return sumRow;
+    }
+
+    function showRowsSums(sumRow) {
+        let boxSumRow = document.createElement("div");
+        let rowsSumsTable = document.createElement("table");
+        document.body.append(boxSumRow);
+        boxSumRow.append(rowsSumsTable);
+        for (let index = 0 ; index < ROWS_NUMBERS;index++) {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.innerHTML = sumRow[index];
+            tr.append(td);
+            rowsSumsTable.append(tr);
+        }
+    }
+
+    showTable();
+    let sumColumn = calculateColumnsSums();
+    showColumnsSums(sumColumn);
+    let sumRow = calculateRowsSums();
+    showRowsSums(sumRow);
+
+
+
+
+</script>
+
+
+</body>
+</html>

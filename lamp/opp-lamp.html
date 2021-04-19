@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Garland</title>
+    <script src="opp-lamp.js"></script>
+    <link rel="stylesheet" href="opp-lamp.css">
+</head>
+
+<body>
+    <input id="input" type="number"/>
+    <input id="input2" type="number"/>
+    <button onclick="startLamps()">Start</button>
+    <button onclick="startGarland()">Start Garland</button>
+    <button onclick="stopGarland()">Stop Garland</button>
+    <button onclick="stopLamps()">Stop</button>
+    <button onclick="startLampsTwoColours()">Start Two Colour</button>
+    <button onclick="createLamps()">create</button>
+    <section id="container">
+        <div id="circle"></div>
+    </section>
+
+<script>
+    let lamp = new BlinkCircle("circle", 200, "yellow");
+
+    function startLamps() {
+        lamp.blink();
+    }
+    function stopLamps() {
+        lamp.stop();
+    }
+    function startLampsTwoColours() {
+        lamp.blink();
+    }
+//Garland
+    let garland = new Garland(1500, "circle");
+
+    function createLamps() {
+        let input = document.getElementById('input').value;
+        let input2 = document.getElementById('input2').value;
+        garland.create(input,input2 );
+    }
+// add
+
+    function stopGarland() {
+        garland.stop();
+    }
+    function startGarland() {
+        garland.blink();
+    }
+
+
+
+</script>
+
+</body>
+</html>

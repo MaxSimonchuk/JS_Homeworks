@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div>
+    <button onclick="showMainTable()"> Show </button>
+    <div class="container">
+        <select id="main-table"> Вимірювання
+            <option value="1"></option>
+            <!--<option value="2"></option>-->
+            <!--<option value="3"></option>-->
+            <!--<option value="4"></option>-->
+            <!--<option value="5"></option>-->
+        </select>
+        <div id="detail-table"></div>
+    </div>
+</div>
+<script>
+    //    const information = [
+    //        {title: "Серцево судинні захворювання", interest: 84},
+    //        {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+    //        {title: "Артеріальна гіпертензія АГ-2", interest: 37},
+    //        {title: "Захворювання легенової системи", interest: 18}
+    //
+    //    ];
+
+    const information1 = [
+        {
+            name:"Вимірювання 01.02.2021",
+            information: [
+                {title: "Серцево судинні захворювання", interest: 84},
+                {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+                {title: "Артеріальна гіпертензія АГ-2", interest: 37},
+                {title: "Захворювання легенової системи", interest: 18},
+                {title: "Психічні(неврологічні)захворювання", interest: 94},
+                {title: "Аритмія", interest: 100}]
+        },
+        {
+            name:"Вимірювання 02.02.2021",
+            information: [
+                {title: "Серцево судинні захворювання", interest: 84},
+                {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+                {title: "Артеріальна гіпертензія АГ-2", interest: 80},
+                {title: "Захворювання легенової системи", interest: 18},
+                {title: "Психічні(неврологічні)захворювання", interest: 94},
+                {title: "Аритмія", interest: 100}]
+        },
+        {
+            name:"Вимірювання 03.02.2021",
+            information: [
+                {title: "Серцево судинні захворювання", interest: 60},
+                {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+                {title: "Артеріальна гіпертензія АГ-2", interest: 26},
+                {title: "Захворювання легенової системи", interest: 18},
+                {title: "Психічні(неврологічні)захворювання", interest: 73},
+                {title: "Аритмія", interest: 100}]
+        },
+        {
+            name:"Вимірювання 04.02.2021",
+            information: [
+                {title: "Серцево судинні захворювання", interest: 84},
+                {title: "Артеріальна гіпертензія АГ-1", interest: 63},
+                {title: "Артеріальна гіпертензія АГ-2", interest: 97},
+                {title: "Захворювання легенової системи", interest: 18},
+                {title: "Психічні(неврологічні)захворювання", interest: 94},
+                {title: "Аритмія", interest: 100}]
+        },
+        {
+            name:"Вимірювання 07.02.2021",
+            information: [
+                {title: "Серцево судинні захворювання", interest: 25},
+                {title: "Артеріальна гіпертензія АГ-1", interest: 83},
+                {title: "Артеріальна гіпертензія АГ-2", interest: 37},
+                {title: "Захворювання легенової системи", interest: 98},
+                {title: "Психічні(неврологічні)захворювання", interest: 94},
+                {title: "Аритмія", interest: 100}]
+        }
+    ];
+
+    // .................
+
+    function  showTable(i) {
+        let table = document.createElement("table");
+        let container = document.getElementById("detail-table");
+        container.innerHTML = "";
+        container.append(table);
+        for (let index = 0 ; index < information1[i].information.length;index++) {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.style.border = "1px solid black";
+            td.style.backgroundColor = determineColor(index,i);
+            td.innerHTML = information1[i].information[index].title;
+            tr.append(td);
+            let td1 = document.createElement("td");
+            td1.innerHTML = information1[i].information[index].interest + "%";
+            td1.style.border = "1px solid black";
+            td1.style.backgroundColor = determineColor(index,i);
+            tr.append(td1);
+            table.append(tr);
+        }
+    }
+
+    function  showMainTable() {
+        let selectElement = document.getElementById("main-table");
+        let emptyOption = document.createElement("option");
+        selectElement.innerHTML = "";
+        selectElement.append(emptyOption);
+        for (let index = 0 ; index < information1.length;index++) {
+            let option = document.createElement("option");
+            option.value = index;
+            option.style.border = "1px solid black";
+            option.innerHTML = information1[index].name;
+            selectElement.append(option);
+        }
+        selectElement.onchange = function() {
+            showTable(selectElement.value);
+        };
+    }
+
+    function determineColor(index,i) {
+        /* let color = "";
+         if(information[index].interest >= 75) {
+             color = "red";
+         } else if (information[index].interest >= 63){
+             color = "orange";
+         }else {
+             color = "white";
+         }*/
+        return information1[i].information[index].interest >= 75 ? "red" : (information1[i].information[index].interest >= 63 ? "orange" : "white");
+//        return color ;
+    }
+
+</script>
+
+</body>
+</html>
